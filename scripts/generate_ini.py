@@ -24,10 +24,7 @@ def generate_ini(base_file, ini_file):
             if "description" in config_base["sections"][section]["settings"][entry]:
                 ini.set(section, fix_description(config_base["sections"][section]["settings"][entry]["description"]))
             value = config_base["sections"][section]["settings"][entry]["value"]
-            if isinstance(value, bool):
-                value = str(value).lower()
-            else:
-                value = str(value)
+            value = str(value).lower() if isinstance(value, bool) else str(value)
             ini.set(section, entry, value)
 
     with open(Path(ini_file), "w") as config_file:

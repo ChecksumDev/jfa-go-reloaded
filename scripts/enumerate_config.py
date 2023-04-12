@@ -15,10 +15,11 @@ newconfig = {"sections": {}, "order": []}
 
 for sect in config["sections"]:
     newconfig["order"].append(sect)
-    newconfig["sections"][sect] = {}
-    newconfig["sections"][sect]["order"] = []
-    newconfig["sections"][sect]["meta"] = config["sections"][sect]["meta"]
-    newconfig["sections"][sect]["settings"] = {}
+    newconfig["sections"][sect] = {
+        "order": [],
+        "meta": config["sections"][sect]["meta"],
+        "settings": {},
+    }
     for setting in config["sections"][sect]["settings"]:
         newconfig["sections"][sect]["order"].append(setting)
         newconfig["sections"][sect]["settings"][setting] = config["sections"][sect]["settings"][setting]

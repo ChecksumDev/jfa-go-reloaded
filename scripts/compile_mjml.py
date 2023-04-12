@@ -24,11 +24,12 @@ def compile(mjml: Path):
 
 local_path = Path("mail")
 
-threads = []
-
-for mjml in [f for f in local_path.iterdir() if f.is_file() and "mjml" in f.suffix]:
-    threads.append(Thread(target=compile, args=(mjml,)))
-
+threads = [
+    Thread(target=compile, args=(mjml,))
+    for mjml in [
+        f for f in local_path.iterdir() if f.is_file() and "mjml" in f.suffix
+    ]
+]
 for thread in threads:
     thread.start()
 for thread in threads:
